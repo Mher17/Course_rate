@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details of a Course</title>
+</head>
+<body>
+    <form action="{% url 'study:rate' course.id %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend><h1>{{ course.title }}</h1></legend>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <label for="description">Description: {{ course.description }}</label><br><br>
+            <input type="hidden" id="description" name="description"><br><br>
+            <label for="rate">Rating: {{course.rate}}</label>
+            <input type="hidden" id="rate" name="rate"><br><br>
+        </fieldset>
+        <input type="submit" value="Rate">
+    </form>
+</body>
+</html>

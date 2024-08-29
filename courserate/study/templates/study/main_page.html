@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+</head>
+<body>
+    {% if course_list %}
+        <ul>
+        {% for course in course_list %}
+            <li>
+                <a href="{% url 'study:detail' course.id %}">{{ course.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No courses are available.</p>
+    {% endif %}
+    <a href="logout">LOG OUT HERE</a>
+</body>
+</html>
