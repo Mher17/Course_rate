@@ -56,16 +56,17 @@ def log_out(request):
     logout(request)
     return HttpResponseRedirect("/study/login")
 
-def rate(request, course_id, rating):
+def rate(request, course_id):
     if request.user.is_authenticated:
         course = get_object_or_404(Course, pk=course_id)
+        new_course_rate = request.POST['rate_n']
         course.count += 1
-        course.rate = (((course.count - 1) * course.rate) + rating) / course.count
+        course.rate = (((course.count - 1) * course.rate) + new_course_rate) / course.count
         course.save()
             # Always return an HttpResponseRedirect after successfully dealing
             # with POST data. This prevents data from being posted twice if a
             # user hits the Back button.
-        return HttpResponseRedirect(reverse("study:detail", args=(course.id,)))
+        return HttpResponseRedirect(reverse("study:detail", args=(course.id)))
     else:
         return HttpResponseRedirect("/study/login")
 
